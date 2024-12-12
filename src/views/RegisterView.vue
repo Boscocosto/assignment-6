@@ -1,4 +1,26 @@
-<script setup></script>
+<script setup>
+import { RouterLink, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useStore } from "../store"
+
+const store = useStore();
+const router = useRouter();
+const email = ref('');
+const password = ref('');
+const lastName = ref('');
+const name = ref('');
+
+const handleregister = () => {
+  if (password.value === "password") {
+    store.email = email.value;
+    store.name = name.value;
+    store.lastName = lastName.value;
+    router.push("/movies");
+  } else {
+    alert("Invalid Password");
+  }
+};
+</script>
 
 <template>
   <div class="header">
@@ -13,11 +35,12 @@
   <div class="register">
     <div class="registerText">
       <h2>Create an Account</h2>
-      <form>
-        <input type="text" placeholder="Name" class="input-field" required>
-        <input type="email" placeholder="Email" class="input-field" required>
-        <input type="password" placeholder="Password" class="input-field" required>
-        <input type="password" placeholder="Re-Enter Password" class="input-field" required>
+      <form @submit.prevent="handleregister">
+        <input v-model:="name" type="text" placeholder="First Name" class="input-field" required>
+        <input v-model:="lastName" type="text" placeholder="Last Name" class="input-field" required>
+        <input v-model:="email" type="email" placeholder="Email" class="input-field" required>
+        <input v-model:="password" type="password" placeholder="Password" class="input-field" required>
+        <input v-model:="passward"type="password" placeholder="Re-Enter Password" class="input-field" required>
         <button type="submit" class="button">Register</button>
       </form>
     </div>

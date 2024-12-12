@@ -27,7 +27,7 @@ onMounted(async () => {
   <div class="header">
     <div class="logo">
       <img src="/movie.png" class="logo" />
-      <h1>{{ `Hello ${store.email}!` }}</h1>
+      <h1>{{ `Hello ${store.name} ${store.lastName}!` }}</h1>
     </div>
     <div class="buttons">
       <button @click="router.push('/cart')" class="button">Cart</button>
@@ -39,7 +39,7 @@ onMounted(async () => {
       <option v-for="genre of genres" :value="genre.id">{{ genre.genreName }}</option>
     </select>
     <div v-if="response" class="movie-list">
-      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card">
+      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card" @click="getMovieDetails(movie.id)">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster" class="movie-poster" />
         <p class="movie-title">{{ movie.title }}</p>
         <button
@@ -132,6 +132,7 @@ select {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
 }
 
 .movie-card:hover {
@@ -157,7 +158,7 @@ select {
   display: inline-block;
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #28a745; /* Green */
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -169,6 +170,6 @@ select {
 }
 
 .movie-site:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: #4d4d4d;
 }
 </style>
