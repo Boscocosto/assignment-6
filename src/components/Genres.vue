@@ -15,12 +15,12 @@ async function getMovieByGenre() {
 }
 
 function getMovieDetails(id) {
-  router.push(`/movies/${id}`)
+  router.push(`/movies/${id}`);
 }
 
 onMounted(async () => {
   response.value = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_API_KEY}&include_adult=false&with_genres=${selectedGenre.value}`);
-})
+});
 </script>
 
 <template>
@@ -30,8 +30,8 @@ onMounted(async () => {
       <h1>{{ `Hello ${store.email}!` }}</h1>
     </div>
     <div class="buttons">
-      <button @click="router.push(`/cart`)" class="logout-button">Cart</button>
-      <button @click="router.push(`/`)" class="logout-button">Logout</button>
+      <button @click="router.push('/cart')" class="button">Cart</button>
+      <button @click="router.push('/')" class="button">Logout</button>
     </div>
   </div>
   <div class="movie-gallery">
@@ -39,15 +39,61 @@ onMounted(async () => {
       <option v-for="genre of genres" :value="genre.id">{{ genre.genreName }}</option>
     </select>
     <div v-if="response" class="movie-list">
-      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card" @click="getMovieDetails(movie.id)">
+      <div v-for="movie in response.data.results" :key="movie.id" class="movie-card">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster" class="movie-poster" />
         <p class="movie-title">{{ movie.title }}</p>
+        <button
+          @click.stop="store.cart.set(movie.id, { title: movie.title, url: movie.poster_path })"
+          class="movie-site">
+          {{ store.cart.has(movie.id) ? 'Added' : 'Buy' }}
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  background-color: white;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #000000;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0000008d;
+}
+
 .movie-gallery {
   padding: 20px;
   display: flex;
@@ -105,5 +151,24 @@ select {
   padding: 15px;
   font-weight: bold;
   margin: 0;
+}
+
+.movie-site {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #28a745; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.movie-site:hover {
+  background-color: #218838; /* Darker green on hover */
 }
 </style>

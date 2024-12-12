@@ -32,7 +32,7 @@ const handleLogin = () => {
     <div class="loginText">
       <h2>Login to Your Account</h2>
       <form @submit.prevent="handleLogin">
-        <input type="email" placeholder="Email" class="input-field" required />
+        <input v-model:="email" type="email" placeholder="Email" class="input-field" required />
         <input v-model:="password" type="password" placeholder="Password" class="input-field" required />
         <button type="submit" class="button">Login</button>
       </form>

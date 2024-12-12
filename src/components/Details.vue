@@ -2,9 +2,11 @@
 import axios from "axios";
 import { onMounted } from 'vue';
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { useStore } from "../store";
 
 const route = useRoute();
+const router = useRouter();
 const store = useStore();
 const response = await axios.get(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${import.meta.env.VITE_API_KEY}&append_to_response=videos`);
 console.log(response.data);
@@ -15,6 +17,16 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div class="header">
+    <div class="logo">
+      <img src="/movie.png" class="logo" />
+      <h1>{{ `Hello ${store.email}!` }}</h1>
+    </div>
+    <div class="buttons">
+      <button @click="router.push(`/cart`)" class="button">Cart</button>
+      <button @click="router.push(`/`)" class="button">Logout</button>
+    </div>
+  </div>
   <div class="movie-detail">
     <button
       @click="store.cart.set(route.params.id, { title: response.data.original_title, url: response.data.poster_path })"
@@ -42,6 +54,46 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #000000;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0000008d;
+}
 .movie-detail {
   display: flex;
   flex-direction: column;
