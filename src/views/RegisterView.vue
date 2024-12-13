@@ -6,18 +6,19 @@ import { useStore } from "../store"
 const store = useStore();
 const router = useRouter();
 const email = ref('');
-const password = ref('');
+const password1 = ref('');
+const password2 = ref('');
 const lastName = ref('');
 const name = ref('');
 
 const handleregister = () => {
-  if (password.value === "password") {
+  if (password1.value === password2.value) {
     store.email = email.value;
     store.name = name.value;
     store.lastName = lastName.value;
     router.push("/movies");
   } else {
-    alert("Invalid Password");
+    alert("Passwords do not match");
   }
 };
 </script>
@@ -39,8 +40,8 @@ const handleregister = () => {
         <input v-model:="name" type="text" placeholder="First Name" class="input-field" required>
         <input v-model:="lastName" type="text" placeholder="Last Name" class="input-field" required>
         <input v-model:="email" type="email" placeholder="Email" class="input-field" required>
-        <input v-model:="password" type="password" placeholder="Password" class="input-field" required>
-        <input v-model:="passward"type="password" placeholder="Re-Enter Password" class="input-field" required>
+        <input v-model="password1" type="password" placeholder="Password" class="input-field" required />
+        <input v-model="password2" type="password" placeholder="Re-Enter Password" class="input-field" required />
         <button type="submit" class="button">Register</button>
       </form>
     </div>
