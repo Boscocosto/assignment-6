@@ -2,9 +2,9 @@
 </script>
 
 <template>
-    <footer>
+   <div class="footer">
         <h4>Bosco Nie Gmail: Bosco.nie2@student.tdsb.on.ca</h4>
-    </footer>
+   </div>
 </template>
 
 <style scoped>

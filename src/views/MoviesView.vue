@@ -1,6 +1,5 @@
 <script setup>
 import Genres from "../components/Genres.vue";
-import Header from "../components/Header.vue"
 import Footer from "../components/Footer.vue"
 
 const genresList = [

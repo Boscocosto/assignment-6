@@ -1,4 +1,5 @@
 <script setup>
+import Footer from "../components/Footer.vue";
 import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useStore } from "../store"
@@ -25,7 +26,7 @@ const handleLogin = () => {
       <h1>Pop Movies</h1>
     </div>
     <div class="buttons">
-      <RouterLink to="/register" class="button register">Register</RouterLink>
+      <RouterLink to="/register" class="button">Register</RouterLink>
     </div>
   </div>
   <div class="login">
@@ -38,6 +39,7 @@ const handleLogin = () => {
       </form>
     </div>
   </div>
+  <Footer />
 </template>
 
 <style scoped>
@@ -124,21 +126,5 @@ const handleLogin = () => {
 .input-field:focus {
   border-color: #000;
   outline: none;
-}
-
-.button.login {
-  flex: 1 1 45%;
-  padding: 12px;
-  background-color: #333;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.button.login:hover {
-  background-color: #000;
 }
 </style>

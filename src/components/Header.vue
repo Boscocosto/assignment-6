@@ -9,8 +9,8 @@ import { RouterLink } from 'vue-router';
             <h1>Pop Movies</h1>
         </div>
         <div class="buttons">
-            <RouterLink to="/register" class="button register">Register</RouterLink>
-            <RouterLink to="/login" class="button login">Login</RouterLink>
+            <RouterLink to="/register" class="button">Register</RouterLink>
+            <RouterLink to="/login" class="button">Login</RouterLink>
         </div>
     </div>
 </template>

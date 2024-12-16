@@ -1,6 +1,7 @@
 <script setup>
-import { RouterLink, useRouter } from 'vue-router';
+import Footer from "../components/Footer.vue";
 import { ref } from 'vue';
+import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from "../store"
 
 const store = useStore();
@@ -46,6 +47,7 @@ const handleregister = () => {
       </form>
     </div>
   </div>
+  <Footer />
 </template>
 
 <style scoped>
